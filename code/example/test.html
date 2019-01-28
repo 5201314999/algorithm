@@ -13,6 +13,7 @@
     <script src="../js/bubbleSort.js"></script>
     <script src="../js/selectionSort.js"></script>
     <script src="../js/insertionSort.js"></script>
+    <script src="../js/mergeSort.js"></script>
     <script>
         const arr=[100,12,45,50,15,1,60,65];
         console.log('origin arr is:');
@@ -42,6 +43,13 @@
         console.log(insertionSort2([...arr2]));
         const timeStamp4=+new Date();
         console.log((timeStamp4-timeStamp3));
+        
+        const timeStamp5=+new Date();
+        console.log('mergeSort result is:');
+        console.log(mergeSort([...arr2]));
+        const timeStamp6=+new Date();
+        console.log(timeStamp6-timeStamp5);
+
 
         
 
