@@ -4,4 +4,4 @@
 
 ## 十大排序
 
-[issue](https://github.com/5201314999/algorithm/issues/1)
+[十大经典排序](https://github.com/5201314999/algorithm/issues/1)
