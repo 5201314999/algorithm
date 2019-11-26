@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>罗马字转数字（简单） 数字转罗马字（中等）</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link href="" rel="stylesheet" />
+  </head>
+  <body>
+    <script>
+      /**
+       * @param {string} s
+       * @return {number}
+       */
+      var romanToInt = function(s) {
+        let fieldMap = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
+        let sum = 0;
+        for (let i = 0; i < s.length; i++) {
+          if (i < s.length - 1) {
+            if (s[i] === "I" && s[i + 1] === "V") {
+              sum += 4;
+              i++;
+            } else if (s[i] === "I" && s[i + 1] === "X") {
+              sum += 9;
+              i++;
+            } else if (s[i] === "X" && s[i + 1] === "L") {
+              sum += 40;
+              i++;
+            } else if (s[i] === "X" && s[i + 1] === "C") {
+              sum += 90;
+              i++;
+            } else if (s[i] === "C" && s[i + 1] === "D") {
+              sum += 400;
+              i++;
+            } else if (s[i] === "C" && s[i + 1] === "M") {
+              sum += 900;
+              i++;
+            }
+            sum += fieldMap[s[i]];
+          } else {
+            sum += fieldMap[s[i]];
+          }
+        }
+        return sum;
+      };
+      // 抓出所有组合，优先抓组合2个字段的
+      var romanToInt2=function(s){
+        var fieldMap={I: 1, IV:4,V: 5,IX:9, X: 10, XL:40, L: 50, XC:90, C: 100, CD:400, D: 500, CM:900,M: 1000 }
+        let i=0;
+        let sum=0
+        while(i<s.length){
+            if(i+1<=s.length-1&&fieldMap[s[i]+s[i+1]]){
+                sum+=fieldMap[s[i]+s[i+1]]
+                i+=2
+            }
+            else{
+                sum+=fieldMap[s[i]]
+                i++
+            }
+        }
+        return sum
+      }
+      console.log(romanToInt2('III'))
+    </script>
+  </body>
+</html>
