@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>简单-最长公共字前缀["flower","flow","flight"] "fl"</title>
+<meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'/>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script>
+        //LCD(S1...SN)=(LCD(LCD(S1,S2)..SN))  时间复杂度 O(S)
+        var longestCommonPrefix=function (arr){
+            if(arr.length==0) return ''
+            let prefix=arr[0]
+            for(let i=1;i<arr.length;i++){
+                while(i>0&&arr[i].indexOf(prefix)!==0){
+                    prefix=prefix.substring(0,prefix.length-1)
+                }
+                if(prefix==='') return ''
+            }
+            return prefix
+        }
+
+        console.log(longestCommonPrefix(["c","acc","ccc"]))
+    </script>
+</body>
+</html>
