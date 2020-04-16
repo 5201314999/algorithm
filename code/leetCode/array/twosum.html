@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>1. Two Sum</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="" rel="stylesheet">
+</head>
+
+<body>
+  <script>
+    var twoSum = function (nums, target) {
+      var temp={}
+      for(var i=0;i<nums.length;i++){
+        diff=target-nums[i]
+        if(temp[diff]!=undefined){
+          return [temp[diff],i]
+        }
+        temp[nums[i]]=i
+      }
+    };
+
+    console.log(twoSum([3,3],6))
+  </script>
+</body>
+
+</html>
