@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>206. Reverse Linked List (反转链表)</title>
+<title>递归   实现反转链表，空间复杂度为O(n） ，时间复杂度O（n)</title>
 <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'/>
 <meta name="description" content="">
 <meta name="keywords" content="">
@@ -15,23 +15,21 @@
             this.val=val;
             this.next=null;
         }
+
+        // 反转后尾接 ,返回一个头部
         var reverseList = function(head) {
-            var cur=head
-            var prev
-            while(cur){
-                var temp=cur.next
-                cur.next=prev
-                prev=cur
-                cur=temp
+            if(!head||head.next){
+                return head
             }
-            return prev
 
-            //简化语法
-            let [cur,head]=[head,null]
+            let next=head.next
+            const rHead=reverList(next)
+            
+            head.next=null // 裁剪head 后面的东西
+            next.next=head // 尾接
 
-            while(cur){
-                [cur.next,prev,cur]=[prev,cur,cur.next]
-            }
+            return rHead
+            
         };
         
         var arr=[]
