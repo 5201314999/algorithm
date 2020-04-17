@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>206. Reverse Linked List (反转链表)</title>
+<meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'/>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script>
+        function ListNode(val){
+            this.val=val;
+            this.next=null;
+        }
+        var reverseList = function(head) {
+            var cur=head
+            var prev
+            while(cur){
+                var temp=cur.next
+                cur.next=prev
+                prev=cur
+                cur=temp
+            }
+            return prev
+        };
+        
+        var arr=[]
+        for(var i=0;i<5;i++){
+            arr.push(new ListNode(i+1))
+        }
+        for(var i=0;i<4;i++){
+            arr[i].next=arr[i+1]
+        }
+        d=arr[0]
+        while(d){
+             console.log(d.val)
+             d=d.next
+         }
+
+        var c=reverseList(arr[0])
+         while(c){
+             console.log(c.val)
+             c=c.next
+         }
+    </script>
+</body>
+</html>
