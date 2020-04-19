@@ -11,7 +11,46 @@
 </head>
 <body>
     <script>
-            
+        function ListNode(val){
+            this.val=val;
+            this.next=null;
+        }
+
+        var reverseList = function(head) {
+            return reverse(null,head)
+        }
+
+        var reverse=function(pre,cur){
+            if(!cur){
+                return pre
+            }
+            let temp=cur.next
+            cur.next=pre
+            return reverse(cur,temp)
+        }
+
+
+        //编写测试用例
+        var arr=[]
+        for(var i=0;i<5;i++){
+            arr.push(new ListNode(i+1))
+        }
+        for(var i=0;i<4;i++){
+            arr[i].next=arr[i+1]
+        }
+        d=arr[0]
+        while(d){
+             console.log(d.val)
+             d=d.next
+         }
+
+        var c=reverseList(arr[0])
+         while(c){
+             console.log(c.val)
+             c=c.next
+         }
+
+
     </script>
 </body>
 </html>
