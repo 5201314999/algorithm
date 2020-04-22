@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>用栈实现队列(只能用js push和pop 2个函数，length 以及随机访问。使用2个栈，倒2次就是正的，而且不用每次都倒)</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link href="" rel="stylesheet" />
+  </head>
+  <body>
+    <script>
+      /**
+       * Initialize your data structure here.
+       */
+      var MyQueue = function () {
+         this.astack=[]
+         this.bstack=[]
+      };
+
+      /**
+       * Push element x to the back of queue.
+       * @param {number} x
+       * @return {void}
+       */
+      MyQueue.prototype.push = function (x) {
+          this.astack.push(x)
+      };
+
+      /**
+       * Removes the element from in front of queue and returns that element.
+       * @return {number}
+       */
+      MyQueue.prototype.pop = function () {
+        if(this.bstack.length===0){
+            let length=this.astack.length
+            for(let i=0;i<length;i++){
+                this.bstack.push(this.astack.pop())
+            }
+        }
+        return this.bstack.pop()
+      };
+
+      /**
+       * Get the front element.
+       * @return {number}
+       */
+      MyQueue.prototype.peek = function () {
+          return this.bstack[this.bstack.length-1]||this.astack[0]
+      };
+
+      /**
+       * Returns whether the queue is empty.
+       * @return {boolean}
+       */
+      MyQueue.prototype.empty = function () {
+          return this.astack.length===0&&this.bstack.length===0
+      };
+
+      /**
+       * Your MyQueue object will be instantiated and called as such:
+       * var obj = new MyQueue()
+       * obj.push(x)
+       * var param_2 = obj.pop()
+       * var param_3 = obj.peek()
+       * var param_4 = obj.empty()
+       */
+        const queue=new MyQueue()
+        queue.push(1);
+        queue.push(2);  
+        console.log(queue.peek());  // returns 1
+        console.log(queue.pop());   // returns 1
+        console.log(queue.empty()); // returns false
+
+    </script>
+  </body>
+</html>
