@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>找出所有3数之和==0（target) 的组合</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="" rel="stylesheet">
+</head>
+
+<body>
+  <script>
+    // 暴力法：挑选出3个O（n^3)
+    // 枚举2个值，第3个值用哈希表存储，O(n^2)，同时找出来的结果排序后加入set 中去重, js set 没有去重线性表的能力，所以使用map ，耗费了额外的空间,实测超时
+    /**
+     * @param {number[]} nums
+     * @return {number[][]}
+     */
+    var threeSum = function (nums) {
+      if(nums.length<3){
+        return []
+      }
+      nums.sort((a,b)=>a-b) // 排序是为了方便去重。
+      var map=new Map()
+      for(let i=0;i<nums.length-2;i++){
+        if(i>0&&nums[i]===nums[i-1])
+        var hash={}
+        for(let j=i+1;j<nums.length;j++){
+          var c=0-nums[i]-nums[j]
+          if(hash[c]!==undefined){
+            map.set(`${nums[i]},${c}`,[nums[i],c,nums[j]])
+          }
+          else{
+            hash[nums[j]]=1
+          }
+        }
+      }
+      var res=[]
+      map.forEach(e => {
+        res.push(e)
+      });
+      return res
+    };
+    let nums=[-1, 0, 1, 2, -1, -4]
+    console.log(threeSum(nums))
+
+  
+    //夹逼法
+    var threeSum2 = function (nums) {
+      if(!nums||nums.length<3) return []
+      let res=[]
+      nums.sort((a,b)=>a-b)
+      console.log(nums)
+      for(let i=0;i<nums.length-2;i++){
+        let l=i+1;
+        let r=nums.length-1;
+        // 防止重复的数据(非常重要)
+        if(i>0&&nums[i]===nums[i-1]){
+          continue
+        }
+        while(l<r){
+          if(nums[i]+nums[l]+nums[r]>0){
+            r--
+          }
+          else if(nums[i]+nums[l]+nums[r]<0){
+            l++
+          }
+          else{
+            res.push([nums[i],nums[l],nums[r]])
+            //去重，非常重要
+            while(l<r&&nums[l]===nums[l+1]){
+              l++
+            }
+            while(l<r&&nums[r]===nums[r-1]){
+              r--
+            }
+            l++ 
+            r--
+          }
+        }
+      }
+    return res
+    }
+
+    let nums2=[-1, 0, 1, 2, -1, -4]
+    console.log(threeSum2(nums2))
+
+
+  </script>
+</body>
+
+</html>
