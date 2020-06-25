@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>2叉查找树，最近公共祖先（简单）,先理解非2叉查找数 是怎么做的，2叉搜索树是可以利用特性查找</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="" rel="stylesheet">
+</head>
+
+<body>
+  <script>
+    /**
+     * Definition for a binary tree node.
+     * function TreeNode(val) {
+     *     this.val = val;
+     *     this.left = this.right = null;
+     * }
+     */
+
+    //  定义数节点
+     function TreeNode(val) {
+         this.val = val;
+          this.left = this.right = null;
+     }
+
+    /**
+     * @param {TreeNode} root
+     * @param {TreeNode} p
+     * @param {TreeNode} q
+     * @return {TreeNode}
+     */
+    var lowestCommonAncestor = function (root, p, q) {
+     if(root.val>p.val&&root.val>q.val)
+      return lowestCommonAncestor(root.left,p,q)
+     if(root.val<p.val&&root.val<q.val){
+      return lowestCommonAncestor(root.right,p,q)
+     }
+      return root
+    };
+
+    
+  </script>
+</body>
+
+</html>
