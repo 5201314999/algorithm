@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>求众数,假设数组肯定存在一个count(n/2)的元素</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="" rel="stylesheet">
+</head>
+
+<body>
+  <script>
+    /**
+     * @param {number[]} nums
+     * @return {number}
+     */
+    //  map 处理 
+    var majorityElement = function (nums) {
+      let map=new Map()
+      for(let i=0;i<nums.length;i++){
+        map.has(nums[i])?map.set(nums[i],map.get(nums[i])+1):map.set(nums[i],1);
+        if(map.get(nums[i])>nums.length/2){
+          return nums[i]
+        }
+      }
+    };
+    console.log(majorityElement([2,3,3,3,1,3,4]))
+  </script>
+</body>
+
+</html>

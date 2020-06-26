@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>求x^n 次方</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="" rel="stylesheet">
+</head>
+
+<body>
+  <script>
+    /**
+     * @param {number} x
+     * @param {number} n
+     * @return {number}
+     */
+    // 调用库函数，直接通关
+    var myPow = function (x, n) {
+      return Math.pow(x, n)
+    };
+    // 循环n次,O(n)
+    
+    // 分治法 O(logn)  空间复杂度O(logn) 递归要中途记录调用递归记录
+    var myPow=function(x,n){
+      if(n===0) return 1
+      if(n<0) return 1/myPow(x,-n)
+      if(n%2) return x*myPow(x,n-1) //多调用一次变成了偶数
+      return myPow(x*x,n/2) 
+    }
+
+    // 位运算方法 >>> 迭代法， 通过x*=x  n>>=1 , 减少迭代的次数 时间复杂度O（logn) 
+    var myPow=function(x,n){
+      if(n<0){
+        x=1/x
+        n=-n
+      }
+      let res=1;
+      while(n){
+        if(n&1){
+          res*=x;
+        }
+          x*=x;
+          n>>>=1;
+      }
+      return res
+    }
+
+    console.log(myPow(1,2147483648))
+  </script>
+</body>
+
+</html>
