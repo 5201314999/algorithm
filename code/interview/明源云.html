@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>深度遍历解决对象扁平化</title>
+<meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'/>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script>
+       
+        var dfs=function(node,prefix=[],res={}){
+          if(typeof node!=='object'){
+           key=prefix.join('.')
+           res[key]=node
+          }
+          Object.keys(node).map(e=>{
+              let arr=prefix.concat(e)
+              dfs(node[e],arr,res)
+            })
+          return res;
+        } 
+      
+        var demo={
+          A:1,
+          B:{
+            A:2,
+            B:3
+          },
+          CC:{
+            D:{
+              E:4,
+              F:5
+            }
+          }
+        }
+        console.log(dfs(demo))
+    </script>
+</body>
+</html>
