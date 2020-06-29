@@ -20,13 +20,80 @@
      *     this.left = this.right = null;
      * }
      */
+     function TreeNode(val) {
+          this.val = val;
+          this.left = this.right = null;
+     }
     /**
      * @param {TreeNode} root
      * @return {number[][]}
      */
-    var levelOrder = function (root) {
-      
+     // 广度遍历实现，O(n) 在循环中使用长度来确定一层的终点
+     var levelOrder = function (root) {
+      let res=[]
+      if(!root) return []
+      let queue=[]
+      queue.push(root)
+      // 图的话需要记录访问过的节点
+      // visited.push(root)h
+      while(queue.length>0){
+        let size=queue.length
+        let currentLevel=new Array()
+        let node
+        for(let i=0;i<size;i++){
+          node=queue.shift()
+          currentLevel.push(node.val)
+          node.left&&queue.push(node.left)
+          node.right&&queue.push(node.right)
+        }
+        res.push(currentLevel) 
+      }
+      return res;
     }
+
+    // 深度遍历dfs 来实现
+    var levelOrder = function (root) {
+      let res=[]
+      if(!root) return []
+      dfsLevelOrder(1,root,res)
+      
+      
+      function dfsLevelOrder(level,node,res){
+        !res[level-1]&&res.push([])
+        res[level-1].push(node.val)
+        // visitedSet.add(node)  测试节点是否重复度
+       if(node.left){
+          dfsLevelOrder(level+1,node.left,res)
+        }
+       if(node.right){
+          dfsLevelOrder(level+1,node.right,res)
+        }
+      }
+      return res;
+    }
+
+
+
+    function test(){
+//       [
+//   [3],
+//   [9,20],
+//   [15,7]
+// ]
+
+      let a=new TreeNode(3)
+      let b=new TreeNode(9)
+      let c=new TreeNode(20)
+      let d=new TreeNode(15)
+      let e=new TreeNode(7)
+      a.left=b 
+      a.right=c
+      c.left=d
+      c.right=e
+      console.log(levelOrder(a))
+    }
+
+    test()
     
   </script>
 </body>
