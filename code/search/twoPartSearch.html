@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>2分查找</title>
+<meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'/>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script>
+        function twoPartSearch(arr,target){
+          let left=0;right=arr.length-1;
+          let mid
+          while(left<=right){
+            mid=Math.floor((left+right)/2)
+            if(arr[mid]===target) return mid;
+            if(arr[mid]<=target){
+              left=mid+1;
+            }
+            else{
+              right=mid-1;
+            }
+          }
+          return -1;
+        }
+
+        console.log(twoPartSearch([10,14,19,26,27,31,33,35,42,44],31))
+    </script>
+</body>
+</html>
