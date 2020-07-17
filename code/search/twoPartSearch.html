@@ -11,6 +11,7 @@
 </head>
 <body>
     <script>
+        // 时间复杂度， O(logn)， 但是数组必须是有序的，且中间索引容易计算
         function twoPartSearch(arr,target){
           let left=0;right=arr.length-1;
           let mid
@@ -26,7 +27,6 @@
           }
           return -1;
         }
-
         console.log(twoPartSearch([10,14,19,26,27,31,33,35,42,44],31))
     </script>
 </body>
