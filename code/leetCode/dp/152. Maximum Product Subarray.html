@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>乘积最大子序列,有几个特点，负负得正，序列，不能中断</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="" rel="stylesheet">
+</head>
+
+<body>
+  <script>
+    // 要掌握2种方法 
+    /**
+     * @param {number[]} nums
+     * @return {number}
+     */
+    //  1.暴力recursion(不会写。。。)
+    var maxProduct = function (nums) {
+       
+    };
+
+    // 2. 状态 dp[i][2]  0 最大值  1 最小值 ,使用变量得好处是可读性强。多维数组扩展性较强。
+    var maxProduct= function(nums){
+      let res=nums[0]
+      let prevMin=nums[0]
+      let prevMax=nums[0]
+
+      let dpMin;let dpMax;
+      for(let i=1;i<nums.length;i++){
+
+        dpMax=Math.max(nums[i]*prevMin,nums[i]*prevMax,nums[i]);
+        dpMin=Math.min(nums[i]*prevMin,nums[i]*prevMax,nums[i]);
+
+        prevMin=dpMin;
+        prevMax=dpMax;
+        res=Math.max(res,dpMax);
+      }
+      return res;
+    }
+
+    console.log(maxProduct([2,3,-2,4]))
+  </script>
+</body>
+
+</html>
