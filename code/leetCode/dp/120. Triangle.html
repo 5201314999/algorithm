@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>三角形最小路径和， 从顶部到底部</title>
+    <meta name='viewport'
+        content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+</head>
+
+<body>
+    <script>
+        // 1. 递归   2 贪心，greedy 不行   3. dp
+        /**
+         * @param {number[][]} triangle
+         * @return {number}
+         */
+        // 从底部到经过当前点的最小和
+        // dp[i][j]=math.min(dp[i+1][j],dp[i+1][j+1])+nums[i][j] 
+        // 转化为代码不会写。。
+
+       //    时间O(m*n) 空间O(m*n)
+        var minimumTotal = function (triangle) {
+            const height=triangle.length;
+            const width=triangle[height-1].length;
+            const dp=new Array(height);
+            for(let i=0;i<dp.length;i++){
+                dp[i]=new Array(width)
+            }
+
+            //初始状态
+            for(let i=0;i<width;i++){
+                dp[height-1][i]=triangle[height-1][i]
+            }
+
+            for(let i=height-2;i>=0;i--){
+                for(let j=0;j<triangle[i].length;j++){
+                    dp[i][j]=Math.min(dp[i+1][j],dp[i+1][j+1])+triangle[i][j] 
+                }
+            }
+            
+            return dp[0][0]
+
+        };
+
+        // 做一个优化 dp[i][j] 都存在dp[i] 即可
+    </script>
+</body>
+
+</html>
