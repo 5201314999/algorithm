@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>一个网格，从左上方，每次只能往下或者往右走一步，怎么到达右下角的终点，中间可能还有石头。求所有方案</title>
+<meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'/>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script>
+        // 递归加记忆化的方法，参考斐波那契
+
+        let countPath=function (cache,gridArr,row,col){
+          // 石头或者越界
+          if(row>7||col>7||!gridArr[row][col]) return 0;
+          // 终点
+          if(row===7&&col===7) return 1;
+          
+          if(!cache[row][col]){
+            cache[row][col]=countPath(cache,gridArr,row+1,col)+countPath(cache,gridArr,row,col+1)
+          }
+
+          return cache[row][col];          
+        }
+
+        //1 是空地，0 是石头
+        grid=[
+          [1,1,1,1,1,1,1,1],
+          [1,1,0,1,1,1,0,1],
+          [1,1,1,1,0,1,1,1],
+          [0,1,0,1,1,0,1,1],
+          [1,1,0,1,1,1,1,1],
+          [1,1,1,0,0,1,0,1],
+          [1,0,1,1,1,0,1,1],
+          [1,1,1,1,1,1,1,1],
+        ]
+        
+        //js 的2维数组创建比较麻烦
+        cache=new Array(8).fill(0).map(arr=>arr=new Array(8).fill(0))
+  
+
+        console.log(countPath(cache,grid,0,0))
+
+        console.log(cache)
+
+
+        // 动态递推dp方法(不会写。。。)
+
+        const countPath=(grid,row,col)=>{
+          const op=new Array(8).fill(0).map(arr=>arr=new Array(8).fill(0))
+          op[0][0]=1;
+          for(let i=0;i<row.length;i++){
+
+          }
+        }
+
+    </script>
+</body>
+</html>
