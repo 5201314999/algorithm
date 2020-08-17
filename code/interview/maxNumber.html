@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>字符串中最大的数字</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="" rel="stylesheet">
+</head>
+
+<body>
+  <script>
+    // sss222dd333
+    function max(str) {
+      let res;
+      let temp = '';
+      for (let i = 0; i < str.length; i++) {
+        var rep = /\d/;
+        if (rep.test(str[i])) {
+          temp = `${temp}${str[i]}`
+          res=typeof res==='undefined'?parseInt(temp):(parseInt(temp) > res?parseInt(temp):res);
+        }
+        else{
+          temp=''
+        }
+      }
+      return res;
+    }
+    console.log(max('sss222dd333')) //333
+
+    // 使用正则，替换空格，转数组，取最大值
+    function max(str){
+      console.log(str.replace(/[^0-9]+/g,' ').trimStart())
+      return Math.max(...(str.replace(/[^0-9]+/g,' ').trimStart().split(' ').map(e=>parseInt(e))))
+    }
+
+
+    // 简单场景 提取字符串的所有数字转成整型数字
+
+    function convert(str){
+      return parseInt(str.replace(/[^0-9]/g,''))
+    }
+
+    console.log(convert('0222ddddd22edss1'))
+  </script>
+</body>
+
+</html>
