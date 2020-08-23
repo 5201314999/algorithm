@@ -18,8 +18,57 @@
      * @return {string[][]}
      */
     var solveNQueens = function (n) {
-      
+        if(n<1) return [];
+        var col=new Set();
+        var pie=new Set();
+        var na=new Set();
+
+        var result=[];
+        dfs(n,0,[])
+
+        return gen(result);
+
+        // 把普通数组转成指定格式输出
+        function gen(res){
+          var result=[];
+          var row;
+          var item
+          for(let i=0;i<res.length;i++){
+            row=[];
+            for(let j=0;j<res[i].length;j++){
+              item=new Array(res[0].length).fill('.');
+              // console.log(item.splice(res[i][j],1,'Q'))
+              item[res[i][j]]='Q'
+              row.push(item.join(''))
+            }
+            result.push(row)
+          }
+          return result;
+        }
+
+
+        
+        function dfs(n,i,res){
+          if(i>=n){
+            result.push(res);
+          }
+          for(let j=0;j<n;j++){
+            if(col.has(j)||pie.has(i+j)||na.has(i-j)){
+              continue;
+            }
+            col.add(j)
+            pie.add(i+j)
+            na.add(i-j)
+            dfs(n,i+1,res.concat([j]))
+            col.delete(j);
+            pie.delete(i+j);
+            na.delete(i-j);
+          }
+        }
+
     };
+
+    console.log(solveNQueens(4))
   </script>
 </body>
 
