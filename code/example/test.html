@@ -14,6 +14,7 @@
     <script src="../js/selectionSort.js"></script>
     <script src="../js/insertionSort.js"></script>
     <script src="../js/mergeSort.js"></script>
+    <script src="../js/quickSort.js"></script>
     <script>
         const arr=[100,12,45,50,15,1,60,65];
         console.log('origin arr is:');
@@ -35,24 +36,32 @@
             arr2.push(Math.ceil(Math.random()*10000000));
         }
         
-        const timeStamp1=+new Date();
-        console.log('insertionSort1 result is:');
-        console.log(insertionSort1([...arr2]));
-        const timeStamp2=+new Date();
-        console.log((timeStamp2-timeStamp1));
+
+        const timeStamp7=+new Date();
+        console.log('quickSort result is:');
+        console.log(quickSort([...arr]));
+        const timeStamp8=+new Date();
+        console.log(timeStamp8-timeStamp7);
+
+         // const timeStamp1=+new Date();
+        // console.log('insertionSort1 result is:');
+        // console.log(insertionSort1([...arr2]));
+        // const timeStamp2=+new Date();
+        // console.log((timeStamp2-timeStamp1));
 
                
-        const timeStamp3=+new Date();
-        console.log('insertionSort2 result is:');
-        console.log(insertionSort2([...arr2]));
-        const timeStamp4=+new Date();
-        console.log((timeStamp4-timeStamp3));
+        // const timeStamp3=+new Date();
+        // console.log('insertionSort2 result is:');
+        // console.log(insertionSort2([...arr2]));
+        // const timeStamp4=+new Date();
+        // console.log((timeStamp4-timeStamp3));
         
-        const timeStamp5=+new Date();
-        console.log('mergeSort result is:');
-        console.log(mergeSort([...arr2]));
-        const timeStamp6=+new Date();
-        console.log(timeStamp6-timeStamp5);
+        // const timeStamp5=+new Date();
+        // console.log('mergeSort result is:');
+        // console.log(mergeSort([...arr2]));
+        // const timeStamp6=+new Date();
+        // console.log(timeStamp6-timeStamp5);
+
 
 
         
