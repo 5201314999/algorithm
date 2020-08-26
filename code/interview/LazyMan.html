@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>LazyMan</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="" rel="stylesheet">
+</head>
+
+<body>
+  <!-- 实现一个LazyMan，可以按照以下方式调用:
+  LazyMan("Hank")输出:
+  Hi! This is Hank!
+   
+  LazyMan("Hank").sleep(10).eat("dinner")输出
+  Hi! This is Hank!
+  //等待10秒..
+  Wake up after 10
+  Eat dinner~
+   
+  LazyMan("Hank").eat("dinner").eat("supper")输出
+  Hi This is Hank!
+  Eat dinner~
+  Eat supper~
+   
+  LazyMan("Hank").sleepFirst(5).eat("supper")输出
+  //等待5秒
+  Wake up after 5
+  Hi This is Hank!
+  Eat supper -->
+
+  <script>
+    function LazyMan(str) {
+      const list = [];
+
+      function _lazyMan() {
+
+      }
+      list.push(() => {
+        console.log('this is ' + str)
+        run();
+      })
+
+      setTimeout(run, 0);
+
+      _lazyMan.prototype.eat = function (str) {
+        list.push(() => {
+          console.log(str)
+          run();
+        })
+        return this;
+      }
+
+      _lazyMan.prototype.sleep = function (time) {
+        list.push(() => {
+          setTimeout(() => {
+            console.log('Wake up after ' + time)
+            run()
+          }, time * 1000)
+        })
+        return this;
+      }
+
+      _lazyMan.prototype.sleepFirst = function (time) {
+        list.unshift(() => {
+          setTimeout(() => {
+            run()
+          }, time * 1000)
+        })
+        return this;
+      }
+
+      function run() {
+        if (list.length > 0) {
+          const c = list.shift();
+          c();
+        }
+      }
+
+      return new _lazyMan();
+    }
+
+    LazyMan("Hank")
+    LazyMan("Hank").sleep(10).eat("dinner")
+  </script>
+
+</body>
+
+</html>
