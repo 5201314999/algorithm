@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>高精度计算（虾皮面试题）</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="" rel="stylesheet">
+</head>
+
+<body>
+  <script>
+    function add(a, b) {
+      const aa = String(a).split('');
+      const bb = String(b).split('');
+      let sum = [];
+      let temp = 0;
+      console.log(aa)
+      console.log(bb)
+      let num1, num2, numS;
+      while ((num1 = aa.pop()) && (num2 = bb.pop())) {
+        numS = parseInt(num1) + parseInt(num2) + temp;
+        sum.unshift(numS >= 10 ? numS - 10 : numS);
+        temp = numS >= 10 ? 1 : 0;
+      }
+      while (num1 = aa.pop()) {
+        numS = parseInt(num1) + temp;
+        sum.unshift(numS >= 10 ? numS - 10 : numS);
+        temp = numS >= 10 ? 1 : 0;
+      }
+      while (num2 = bb.pop()) {
+        numS = parseInt(num2) + temp;
+        sum.unshift(numS >= 10 ? numS - 10 : numS);
+        temp = numS >= 10 ? 1 : 0;
+      }
+
+      return sum.join('')
+    }
+
+    console.log(add(22232, 111123));
+    console.log(tes(22232, 111123));
+    console.log(add(10000000000000, 222222222222222222222));  //出错，为什么有个3. （数字转字符串发生错误）
+
+    console.log(tes(10000000000000, 222222222222222222222)); 
+
+    console.log(add('1000000000000022222222','222222222222222222222222333'));
+
+    function tes(a,b){
+      return a+b;
+    }
+  </script>
+</body>
+
+</html>
