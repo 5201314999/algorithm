@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>350. 两个数组的交集 II</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <!-- nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+            输出：[4,9] -->
+    <!-- 输入：nums1 = [1,2,2,1], nums2 = [2,2]
+            输出：[2,2] -->
+    <body>
+        <script>
+            // 思路1: 先排序，再对比 时间O(N)+O(nlgn) 空间复杂度O(n)
+            // 思路2： 使用map， 先算map , 然后便利 数组2 利用map 记录的次数
+
+            /**
+             * @param {number[]} nums1
+             * @param {number[]} nums2
+             * @return {number[]}
+             */
+            var intersect = function (nums1, nums2) {
+                const map1 = new Map()
+                for (let i = 0; i < nums1.length; i++) {
+                    map1.set(nums1[i], map1.get(nums1[i]) ? map1.get(nums1[i]) + 1 : 1)
+                }
+                const res = []
+                for (let i = 0; i < nums2.length; i++) {
+                    if (map1.get(nums2[i])) {
+                        map1.set(nums2[i], map1.get(nums2[i]) - 1)
+                        res.push(nums2[i])
+                    }
+                }
+                return res
+            }
+            console.log(intersect([4, 9, 5], [9, 4, 9, 8, 4]))
+            console.log(intersect([1, 2, 2, 1], [2, 2]))
+
+            // 如果2个数组已经排好序，使用双指针方法 O(n)
+            var intersect2 = function (nums1, nums2) {
+                let i = 0
+                let j = 0
+                let res = []
+                while (i < nums1.length && j < nums2.length) {
+                    if (nums1[i] === nums2[j]) {
+                        res.push(nums1[i])
+                        i++
+                        j++
+                    } else {
+                        nums1[i] < nums2[j] ? ++i : ++j
+                    }
+                }
+                return res
+            }
+            console.log('intersect2:', intersect2([4, 5, 9], [1, 2, 2, 3, 5, 5, 6, 9]))
+        </script>
+    </body>
+</html>

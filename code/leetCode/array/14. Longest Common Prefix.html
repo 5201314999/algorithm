@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>数组最长公共前缀字符串</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+        <script>
+            /*
+                题意
+                输入：strs = ["flower","flow","flight"]
+                输出："fl"
+            */
+
+            // 思路一： 选定基准， 逐一比较使用 indexOf（） =-1 ,筛选出 新的公共前缀作为与下一个元素比较的基准 O(m*n)
+            var longestCommonPrefix = function (strs) {
+                let prefix = strs.length > 0 ? strs[0] : ''
+                for (let i = 1, l = strs.length; i < l && prefix.length !== 0; i++) {
+                    while (strs[i].indexOf(prefix) !== 0 && prefix.length !== 0) {
+                        prefix = prefix.substr(0, prefix.length - 1)
+                    }
+                }
+                return prefix
+            }
+
+            console.log(longestCommonPrefix(['flower', 'flow', 'flight']))
+            console.log(longestCommonPrefix(['dog', 'racecar', 'car']))
+        </script>
+    </head>
+    <body></body>
+</html>

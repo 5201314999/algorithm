@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>转置矩阵</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+        <script>
+            // 第一行换成第一列， 第二行换成第二列
+
+            // 描述：Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+            // Output: [[1,4,7],[2,5,8],[3,6,9]]
+
+            // 输入：matrix = [[1,2,3],[4,5,6]]
+            // 输出：[[1,4],[2,5],[3,6]]
+
+            // 时间复杂度 O(m*n) O(n^2)
+            var transpose = function (matrix) {
+                const r = matrix.length
+                const c = matrix[0].length
+                var res = new Array(c).fill(0).map(e => new Array(r).fill(''))
+                for (let i = 0; i < r; i++) {
+                    for (let j = 0; j < c; j++) {
+                        res[j][i] = matrix[i][j]
+                    }
+                }
+                return res
+            }
+
+            console.log(
+                transpose([
+                    [1, 2, 3],
+                    [4, 5, 6],
+                ])
+            )
+        </script>
+    </head>
+    <body></body>
+</html>
