@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>188. 买卖股票的最佳时机 IV (困难) ,k 为任意值</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            // 理解还未透彻n/2 这个临界值，后续还要再消化 , 运行不通过
+            /**
+             * @param {number} k
+             * @param {number[]} prices
+             * @return {number}
+             */
+            // 当k小于一半时，按照通用状态转移方程，大于n/2 时，等同于正无穷方案，使用这种方案相当于优化了k值比较大的时间复杂度
+            var maxProfit = function (k, prices) {
+                let l = prices.length
+                if (!prices || prices.length === 0) {
+                    return 0
+                }
+
+                if (k >= l / 2) {
+                    return maxProfit2(prices)
+                }   
+
+                let dp = new Array(k+1).fill(new Array(2))  // 交易次数想用1-k表示
+                
+                for(let i=1; i<=k; i++) {
+                    dp[i][0] = 0
+                    dp[i][1] = -prices[0]
+                }
+
+                for(let i=1; i<l; i++) {
+                    // 对交易次数的循环使用反向循环是为了避免使用临时变量。所以我要看看正向的写法
+                    // for(let j=1; j<=k; j++) {
+                    //     dp[j][0] = Math.max(dp[j][0],dp[j][1] + prices[i])
+                    //     dp[j][1] = Math.max(dp[j][1],dp[j-1][0] -prices[i])
+                    // }
+                    for (let j = k; j > 0; j--) {
+                        dp[j][0] = Math.max(dp[j][0], dp[j][1] + prices[i]);
+                        dp[j][1] = Math.max(dp[j][1], dp[j - 1][0] - prices[i]);
+                    }
+                }
+
+                return dp[k][0]
+            }
+
+            var maxProfit2 = function (prices) {
+                let l = prices.length
+                profit0 = 0 
+                profit1 = -prices[0]
+                for (let i = 1; i < l; i++) {
+                    
+                    let newProfit0 = Math.max(profit0, profit1 + prices[i])
+                    let newProfit1 = Math.max(profit1, profit0 - prices[i])
+                    
+                    profit0 = newProfit0
+                    profit1 = newProfit1
+                }
+                return profit0
+            }
+
+            console.log(maxProfit(2,[2,4,1])) //2
+            console.log(maxProfit(2, [3,2,6,5,0,3])) //7
+
+            console.log(maxProfit(2, [3,3,5,0,0,3,1,4])) //6 
+
+        </script>
+    </body>
+</html>

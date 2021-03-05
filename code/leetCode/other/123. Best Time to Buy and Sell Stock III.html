@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>买卖股票III (困难）, 只允许交易2次</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            /* 
+                t[i][k][0] = t[i-1][k][0], t[i-1][k][1] + prices[i]
+                t[i][k][1] = t[i-1][k][1] ,t[i-1][k-1][0]-prices[i] 
+                
+                只有2次机会，每天有4种情况
+                t[i][1][0] = t[i-1][1][0], t[i-1][1][1] + prices[i]
+                t[i][1][1] = t[i-1][1][1], t[i-1][0][0] - prices[i]
+                t[i][2][0] = t[i-1][2][0], t[i-1][2][1] + prices[i]
+                t[i][2][1] = t[i-1][2][1], t[i-1][1][0] - prices[i]
+
+                t[i][1][1] = t[i-1][1][1],  -prices[i]
+            
+            */
+            
+            // 每一天只与前1天有关，直接优化空间复杂度为O(1) ,原本O(n)
+            var maxProfit = function(prices) {    
+                if(!prices || prices.length === 0) {
+                    return 0
+                }
+                let l = prices.length
+                let profit10 = 0  
+                let profit11 = -prices[0]
+                let profit20 = 0
+                let profit21 = -prices[0]
+                
+                for(let i=1; i<l; i++) {
+                    profit10 = Math.max(profit10, profit11 + prices[i])
+                    profit11 = Math.max(profit11 , - prices[i])
+                    profit20 = Math.max(profit20, profit21+ prices[i])
+                    profit21 = Math.max(profit21, profit10 - prices[i])
+                }
+
+                return profit20 
+            };
+
+            console.log(maxProfit([3,3,5,0,0,3,1,4])) //6
+            console.log(maxProfit([1,2,3,4,5])) //4
+            console.log(maxProfit([7,6,4,3,1])) //0
+
+
+        </script>
+    </body>
+</html>

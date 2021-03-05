@@ -18,6 +18,7 @@
 
             // 使用股票dp 通解算法
             /*   
+            参考通解： https://leetcode-cn.com/circle/article/qiAgHn/
             每天操作 3种 买入，休息，卖出
             T[i][k][0] 第i 天允许的k次交易，且当天持有份额为1 的最大收益
             T[i][k][0] = max( T[i-1][k][0] , T[i-1][k][1] + prices[i])  

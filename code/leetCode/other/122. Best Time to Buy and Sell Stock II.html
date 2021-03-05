@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>买卖一只股票（贪心算法，DSP)，求最大收益，有仓位不能继续买，没交易费</title>
+        <title>买卖一只股票（贪心算法，DSP)，求最大收益，有仓位不能继续买，没交易费, 不限制最大交易次数</title>
         <meta
             name="viewport"
             content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
@@ -30,10 +30,51 @@
 
             console.log(maxProfit([7, 1, 5, 3, 6, 4]))
 
-            // DP 算法()
-            var maxProfit = function () {
-                
+            // DP 算法通解
+            /*        
+                T[i][k][0] = T[i-1][k][0] + T[i-1][k][1] + prices[i]
+                T[i][k][1] = T[i-1][k][1] + T[i-1][k-1][0] - prices[i] 
+            */
+
+            var maxProfit2 = function (prices) {
+                if (!prices || prices.length < 2) {
+                    return 0
+                }
+                let l = prices.length
+                let dp = new Array(l).fill(new Array(2))
+                dp[0][0] = 0
+                dp[0][1] = -prices[0]
+              
+                for (let i = 1; i < l; i++) {
+                    dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i])
+                    dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i])
+                }
+                return dp[l-1][0]
             }
+
+            console.log('dp算法： ',maxProfit2([7, 1, 5, 3, 6, 4]))
+
+            // dp 算法优化空间复杂度（每天只依赖前一天的2个值）
+            var maxProfit3 = function (prices) {
+                if (!prices || prices.length < 2) {
+                    return 0
+                }
+                let l = prices.length
+                let profit0 = 0
+                let profit1 = -prices[0]
+                for (let i = 1; i < l; i++) {
+                    let newProfit0 = Math.max(profit0, profit1 + prices[i])
+                    let newProfit1 = Math.max(profit1, profit0 - prices[i])
+                    
+                    profit0 = newProfit0
+                    profit1 = newProfit1
+                }
+                return profit0
+            }
+
+            console.log('dp算法O(1) 复杂度： ',maxProfit2([7, 1, 5, 3, 6, 4]))
+            console.log('dp算法O(1) 复杂度： ',maxProfit2([1,2,3,4,5]))
+
         </script>
     </body>
 </html>
