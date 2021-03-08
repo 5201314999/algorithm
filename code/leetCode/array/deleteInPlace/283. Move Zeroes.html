@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>移动0</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            /**
+             * @param {number[]} nums
+             * @return {void} Do not return anything, modify nums in-place instead.
+             */
+            // 把0移动到数组后面，且保持非0数据的相对顺序, 双指针
+            var moveZeroes = function (nums) {
+                let i = 0
+                let l = nums.length
+                for (let j = 0; j < l; j++) {
+                    if (nums[j] !== 0) {
+                        nums[i] = nums[j]
+                        i++
+                    }
+                }
+                for (let j = i; j < l; j++) {
+                    nums[j] = 0
+                }
+                console.log(nums)
+            }
+
+            console.log(moveZeroes([0, 1, 0, 3, 12]))
+        </script>
+    </body>
+</html>
