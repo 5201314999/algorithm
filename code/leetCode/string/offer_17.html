@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>剑指 Offer 17. 打印从1到最大的n位数(简单)</title>
+<meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'/>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script>
+
+        // 普通实现方法
+        // 输入3，就打印1-999
+        /**
+         * @param {number} n
+         * @return {number[]}
+         */
+        var printNumbers = function(n) {
+            const length = Math.pow(10,n)
+            
+            const arr=[]
+
+            for(let i=1;i<length;i++) {
+                arr.push(i)
+            }
+
+            return arr
+        };
+
+
+        // 实现大数的打印,字符串的角度考虑
+
+        // 我们该如何模拟一个 “最大的n位十进制数” 
+        var printNumbers = function(n) {
+            
+        }
+
+
+        console.log(printNumbers(1))
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>加一问题（简单）</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            /**
+             * @param {number[]} digits
+             * @return {number[]}
+             */
+            var plusOne = function (digits) {
+                if (!digits.length) {
+                    return
+                }
+
+                let i = digits.length
+                let temp = 1
+                let sum
+                while (i--) {
+                    sum = digits[i] + temp
+                    digits[i] = sum % 10
+                    temp = Math.floor(sum / 10)
+                }
+                return temp > 0 ? [temp, ...digits] : digits
+            }
+
+            plusOne([1, 2, 3])
+            console.log(plusOne([9]))
+
+            // 针对加1 的优化
+
+            var plusOne = function (digits) {
+                if (!digits.length) {
+                    return
+                }
+
+                let i = digits.length
+                let temp = 1
+                let sum
+                while (i--) {
+                    sum = digits[i] + temp
+                    digits[i] = sum % 10
+                    temp = Math.floor(sum / 10)
+                }
+                return temp > 0 ? [temp, ...digits] : digits
+            }
+
+            var plusOne = function (digits) {
+
+                for (let l = digits.length, i = l - 1; i >= 0; i--) {
+                    if (digits[i] !== 9) {
+                        digits[i]++
+                        return digits
+                    } else {
+                        digits[i] = 0
+                    }
+                }
+
+                digits = new Array(digits.length + 1).fill(0)
+                digits[0] = 1
+                return digits
+            }
+
+            console.log(plusOne([1, 2, 3]))
+            console.log(plusOne([9]))
+        </script>
+    </body>
+</html>

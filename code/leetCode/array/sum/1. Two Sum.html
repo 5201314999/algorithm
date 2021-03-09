@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>2数之和，map 实现方式</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            var twoSum = function (nums, target) {
+                const map = new Map()
+                for (let i = 0; i < nums.length; i++) {
+                    if (map.has(target - nums[i])) {
+                        return [map.get(target - nums[i]), i]
+                    }
+                    map.set(nums[i], i)
+                }
+                return null
+            }
+
+            console.log(twoSum([3, 3], 6))
+
+            /**
+             * @param {number[]} nums
+             * @param {number} target
+             * @return {number[]}
+             */
+            var twoSum = function (nums, target) {
+                if (!nums.length) {
+                    return []
+                }
+                let map = new Map()
+                for (let i = 0; i < nums.length; i++) {
+                    if (map.has(target - nums[i])) {
+                        return [map.get(target - nums[i]), i]
+                    } else {
+                        map.set(nums[i], i)
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

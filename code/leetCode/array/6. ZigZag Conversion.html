@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Z字形变换(中等)</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            // 根据给定的字符串和行数生成一个z形状，最后从左到右，从上到下输出新字符串
+
+            /* 
+        PAYPALISHIRING
+            P   A   H   N
+            A P L S I I G
+            Y   I   R
+        */
+
+            /**
+             * @param {string} s
+             * @param {number} numRows
+             * @return {string}
+             */
+            // 按行排序， 且逐步放置
+            var convert = function (s, numRows) {
+                if (numRows === 1) return s
+
+                let arr = new Array(Math.min(numRows, s.length)).fill('')
+                
+                // 这个down 的设置很巧妙
+                let down = false
+                let curRow = 0
+                for (let i = 0; i < s.length; i++) {
+                    arr[curRow]+=s.charAt(i)
+                    if (curRow === 0 || curRow === numRows - 1) {
+                        down = !down
+                    }
+                    down ? curRow++ : curRow--
+                }
+                let newS = ''
+                for (let i = 0; i < arr.length; i++) {
+                    newS += arr[i]
+                }
+
+                return newS
+            }
+
+            console.log(convert('PAYPALISHIRING', 3))
+
+        </script>
+    </body>
+</html>
