@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>2. 两数相加</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            /**
+             * Definition for singly-linked list.
+             * function ListNode(val, next) {
+             *     this.val = (val===undefined ? 0 : val)
+             *     this.next = (next===undefined ? null : next)
+             * }
+             */
+            /**
+             * @param {ListNode} l1
+             * @param {ListNode} l2
+             * @return {ListNode}
+             */
+
+            // 逆序存着2个数，求2个数的和 ， 类似大数相加 , 基础操作
+            var addTwoNumbers = function (l1, l2) {
+                let dummy = new ListNode()
+                let cur = dummy
+                let forward = 0
+                while (l1 && l2) {
+                    let sum = l1.val + l2.val + forward
+                    forward = Math.floor(sum / 10)
+                    sum = sum % 10
+                    cur.next = new ListNode(sum)
+                    l1 = l1.next
+                    l2 = l2.next
+                    cur = cur.next
+                }
+                l1 = l1 ? l1 : l2
+                while (l1) {
+                    let sum = l1.val + forward
+                    forward = Math.floor(sum / 10)
+                    sum = sum % 10
+                    cur.next = new ListNode(sum)
+                    l1 = l1.next
+                    cur = cur.next
+                }
+                if (forward > 0) {
+                    cur.next = new ListNode(forward)
+                }
+                return dummy.next
+            }
+        </script>
+    </body>
+</html>

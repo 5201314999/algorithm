@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>21. 合并两个有序链表</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            /**
+             * Definition for singly-linked list.
+             * function ListNode(val, next) {
+             *     this.val = (val===undefined ? 0 : val)
+             *     this.next = (next===undefined ? null : next)
+             * }
+             */
+            /**
+             * @param {ListNode} l1
+             * @param {ListNode} l2
+             * @return {ListNode}
+             */
+            // 非常简单，用2个指针即可 , 前端造数据测试麻烦，直接用leetcode 测试
+            var mergeTwoLists = function (l1, l2) {
+                let dummy = new ListNode()
+                let cur = dummy
+                while (l1 && l2) {
+                    if (l1.val <= l2.val) {
+                        cur.next = l1
+                        l1 = l1.next
+                    } else {
+                        cur.next = l2
+                        l2 = l2.next
+                    }
+                    cur = cur.next
+                }
+                if (l1) {
+                    cur.next = l1
+                }
+                if (l2) {
+                    cur.next = l2
+                }
+                return dummy.next
+            }
+
+            function makeNode(arr) {
+                const dummy = new ListNode()
+                const cur = dummy
+                arr.map((e) => {
+                    cur.next = new ListNode(e)
+                    cur = cur.next
+                })
+
+                return dummy.next
+            }
+
+            function ListNode(val, next) {
+                this.val = val === undefined ? 0 : val
+                this.next = next === undefined ? null : next
+            }
+        </script>
+    </body>
+</html>

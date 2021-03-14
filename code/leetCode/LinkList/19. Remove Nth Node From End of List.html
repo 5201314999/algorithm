@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>
+            19. 删除链表的倒数第 N 个结点(中等) js 考察链表的实现其实比较少
+        </title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            /**
+             * Definition for singly-linked list.
+             * function ListNode(val, next) {
+             *     this.val = (val===undefined ? 0 : val)
+             *     this.next = (next===undefined ? null : next)
+             * }
+             */
+            /**
+             * @param {ListNode} head
+             * @param {number} n
+             * @return {ListNode}
+             */
+
+            // js初始化链表麻烦，还有一个概念： 哨兵节点(亚节点）。主要的作用是方便删除第一个节点
+            // 这里一遍其实是O(M+N)了 , 空间复杂度O(1)
+            var removeNthFromEnd = function (head, n) {
+                let dummy = new ListNode('', head)
+
+                let getLength = function (head) {
+                    let num = 0
+                    while (head) {
+                        num++
+                        head = head.next
+                    }
+                    return num
+                }
+
+                let l = getLength(head)
+
+                let pre = dummy
+                let cur = head
+                let index = 1
+
+                while (index < l - n + 1) {
+                    pre = cur
+                    cur = cur.next
+                    index++
+                }
+                pre.next = cur.next
+
+                return dummy.next
+            }
+        </script>
+    </body>
+</html>
