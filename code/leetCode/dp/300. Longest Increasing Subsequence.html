@@ -1,77 +1,91 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>最长上升子序列 （不要求连续） 常见的dp 问题</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>最长上升子序列 （不要求连续） 常见的dp 问题</title>
-  <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <link href="" rel="stylesheet">
-</head>
+    <body>
+        <script>
+            /**
+             * @param {number[]} nums
+             * @return {number}
+             */
+            // dp 方案， 时间复杂度为O(n^2) ,空间复杂度为O（n)
+            var lengthOfLIS = function (nums) {
+                if (nums.length == 0) return 0
+                let dp = new Array(nums.length)
+                dp[0] = 1
+                for (let i = 1; i < nums.length; i++) {
+                    let max = 0
+                    for (let j = 0; j < i; j++) {
+                        if (nums[j] < nums[i] && dp[j] > max) {
+                            max = dp[j]
+                        }
+                    }
+                    dp[i] = max + 1
+                }
+                return Math.max(...dp)
+            }
+            console.log(lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]))
 
-<body>
-  <script>
-    /**
-     * @param {number[]} nums
-     * @return {number}
-     */
-    // dp 方案， 时间复杂度为O(n^2) ,空间复杂度为O（n)
-    var lengthOfLIS = function (nums) {
-      if (nums.length == 0) return 0;
-      let dp=new Array(nums.length);
-      dp[0]=1;
-      for (let i = 1; i < nums.length; i++) {
-       let max=0;
-       for(let j=0;j<i;j++){
-        if(nums[j]<nums[i]&&dp[j]>max){
-          max=dp[j]
-        }
-       }
-       dp[i]=max+1;
-      }
-      return Math.max(...dp)
-    };
-    console.log(lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]))
-    
+            // 2分查找法o(nlogn)
+            // 思路，把最长子序列都存起来，每次进来一个值找到比他大的最小值进行替换 。最终 size 就是结果
+            var lengthOfLIS = function (nums) {
+                let lis = []
+                for (let i = 0; i < nums.length; i++) {
+                    let index = lowerBoundSort(lis, nums[i])
+                    if (index === lis.length) {
+                        lis.push(nums[i])
+                    } else {
+                        lis.splice(index, 1, nums[i])
+                    }
+                    console.log(lis)
+                }
 
-    // 2分查找法o(nlogn)
-    // 思路，把最长子序列都存起来，每次进来一个值找到比他大的最小值进行替换 。最终 size 就是结果
-    var lengthOfLIS = function (nums) {
-      let lis=[];
-      for(let i=0;i<nums.length;i++){
-        let index=lowerBoundSort(lis,nums[i])
-        if(index===lis.length){
-          lis.push(nums[i])
-        }
-        else{
-          lis.splice(index,1,nums[i])
-        }
-        console.log(lis)
-      }
-     
-      return lis.length;
-    };
-    
-    // 2 分查找(不是特别理解找出>= 的这种写法，后续再加强)
-    let lowerBoundSort=(arr,target)=>{
-      let start=0, end=arr.length-1;
-      while(start<=end){
-        mid=Math.floor((start+end)/2)
-        if(target>arr[mid]){
-          start=mid+1;
-        }
-        else{
-          end=mid-1;
-        }
-      }
-      return start;
-    }; 
-    // console.log(lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]))
-    console.log(lengthOfLIS([2,2]))
-    console.log(lowerBoundSort([2,5,10],11));
-  </script>
-</body>
+                return lis.length
+            }
 
+            // 2 分查找(不是特别理解找出>= 的这种写法，后续再加强)
+            let lowerBoundSort = (arr, target) => {
+                let start = 0,
+                    end = arr.length - 1
+                while (start <= end) {
+                    mid = Math.floor((start + end) / 2)
+                    if (target > arr[mid]) {
+                        start = mid + 1
+                    } else {
+                        end = mid - 1
+                    }
+                }
+                return start
+            }
+            // console.log(lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]))
+            console.log(lengthOfLIS([2, 2]))
+            console.log(lowerBoundSort([2, 5, 10], 11))
+
+            //test 2次测试
+            var lengthOfLIS3 = function (nums) {
+                var dp = new Array(nums.length)
+                dp[0] = 1
+                for (let i = 1; i < nums.length; i++) {
+                    dp[i] = 1
+                    for (let j = 0; j < i; j++) {
+                        if (nums[j] < nums[i]) {
+                            dp[i] = Math.max(dp[i], dp[j] + 1)
+                        }
+                    }
+                }
+                return Math.max(...dp)
+            }
+        </script>
+    </body>
 </html>
