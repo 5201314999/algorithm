@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>796. 旋转字符串 (简单）</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            // A = 'abcde', B = 'cdeab'   true
+            /**
+             * @param {string} A
+             * @param {string} B
+             * @return {boolean}
+             */
+            var rotateString = function (A, B) {
+                if (A == B) return true
+                for (let i = 0, l = A.length; i < l; i++) {
+                    if (A.slice(i + 1, l) + A.slice(0, i + 1) == B) return true
+                }
+                return false
+            }
+
+            // 转换为判断B是否为 A + A 的子串，采用 Sunday 算法
+
+            console.log(rotateString('abcde', 'cdeab'))
+        </script>
+    </body>
+</html>

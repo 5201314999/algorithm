@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>141. 环形链表 (简单)</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            /**
+             * Definition for singly-linked list.
+             * function ListNode(val) {
+             *     this.val = val;
+             *     this.next = null;
+             * }
+             */
+
+            /**
+             * @param {ListNode} head
+             * @return {boolean}
+             */
+
+            // 哈希表法
+            var hasCycle = function (head) {
+                map = new Map()
+                let cur = head
+
+                while (cur) {
+                    if (map.has(cur)) {
+                        return true
+                    }
+                    map.set(cur, 1)
+                    cur = cur.next
+                }
+
+                return false
+            }
+
+            // 双指针法 (标准法) 快慢指针，每次有一个走2步，一个走一步，总会遇上
+
+            var hasCycle = function (head) {
+                if (!head || !head.next) return false
+
+                let slow = head
+                let fast = head.next
+
+                while (slow != fast) {
+                    if (!fast || !fast.next) return false
+                    slow = slow.next
+                    fast = fast.next.next
+                }
+
+                return true
+            }
+        </script>
+    </body>
+</html>
