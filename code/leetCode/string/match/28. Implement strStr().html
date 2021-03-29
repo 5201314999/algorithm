@@ -1,32 +1,64 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Examples</title>
-<meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'/>
-<meta name="description" content="">
-<meta name="keywords" content="">
-<link href="" rel="stylesheet">
-</head>
-<body>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>实现一个strstr算法(简单) 其实就是一个indexOf</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            // <!-- api 秒过，不过意义不大 -->
+            /**
+             * @param {string} haystack
+             * @param {string} needle
+             * @return {number}
+             */
 
-    <script>
-     // <!-- api 秒过，不过意义不大 -->
-        /**
-        * @param {string} haystack
-        * @param {string} needle
-        * @return {number}
-        */
+            // 字符串匹配算法： Sunday 算法最简单理解 （子串，模式串）  KMP BM (等算法) 需要一个偏移表存被匹配字符串的偏移量
 
-        // 字符串匹配算法： Sunday 算法最简单理解 （子串，模式串）  KMP BM (等算法) 需要一个偏移表存被匹配字符串的偏移量
-        var strStr = function(haystack, needle) {
-            if(needle === '') return 0;
-            
-            
-            
-            
-        };
-    </script>
-</body>
+            // sunday 算法 ，首先对齐模式串和主串的位置， 如果2者不匹配且看主串后一位是否在模式串中，不在直接移动索引+len(模式串)
+            // 在的话就移动 偏移表(存的是最后一位距离终点的位置)
+
+            // 需要了解字符串api  和 数组api 间的区别
+
+            // 注意: js
+            var strStr = function (haystack, needle) {
+                if (needle === '') return 0
+                if (needle.length > haystack.length) return -1
+
+                // 存储偏移表,同样字母只存储最后一位索引 O(n*l)
+                // 边界 coding 能力
+                let map = new Map()
+                for (let i = 0, l = needle.length; i < l; i++) {
+                    map.set(needle[i], l - i)
+                }
+                let l = haystack.length
+                let nl = needle.length
+                let i = 0
+                while (i < l - nl) {
+                    if (haystack.slice(i, i + nl) === needle) {
+                        return i
+                    } else {
+                        if (!map.has(haystack[i + nl])) {
+                            i = i + nl
+                        } else {
+                            i = i + map.get(haystack[i + nl])
+                        }
+                    }
+                }
+
+                return -1
+            }
+
+            console.log(strStr('hello', 'll'))
+            console.log(strStr('aaaaa', 'bba'))
+        </script>
+    </body>
 </html>
