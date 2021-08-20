@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>最小路径和,网格，每次向左或者向下</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            /**
+             * @param {number[][]} grid
+             * @return {number}
+             */
+            var minPathSum = function (grid) {
+                if (!grid) return
+                let w = grid.length
+                let h = grid[0].length
+                var dp = new Array(w)
+                for (let i = 0; i < w; i++) {
+                    dp[i] = new Array(h)
+                }
+                for (let i = 0; i < w; i++) {
+                    for (let j = 0; j < h; j++) {
+                        if (i === 0 && j === 0) {
+                            dp[0][0] = grid[0][0]
+                        } else if (j === 0) {
+                            dp[i][j] = dp[i - 1][j] + grid[i][j]
+                        } else if (i === 0) {
+                            dp[i][j] = dp[i][j - 1] + grid[i][j]
+                        } else {
+                            dp[i][j] =
+                                Math.min(dp[i - 1][j], dp[i][j - 1]) +
+                                grid[i][j]
+                        }
+                    }
+                }
+                return dp[w - 1][h - 1]
+            }
+        </script>
+    </body>
+</html>

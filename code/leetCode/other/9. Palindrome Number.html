@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>回文数 (同7. 整数反转一类题）</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            /**
+             * @param {number} x
+             * @return {boolean}
+             */
+            // 相当于借助了long ， 可以进一步优化到 只反转一半数字。 （看题解的。。）
+            var isPalindrome = function (x) {
+                var origin = x
+                if (x < 0) return false
+                var rev = 0
+                while (x != 0) {
+                    var tmp = x % 10
+                    x = Math.floor(x / 10)
+                    rev = rev * 10 + tmp
+                }
+                if (rev === origin) {
+                    return true
+                }
+                return false
+            }
+
+            var isPalindrome = function (x) {
+                if (x < 0 || (x % 10 === 0 && x !== 0)) {
+                    return false
+                }
+                var rev = 0
+                var digit = 0
+                while (rev < x) {
+                    digit = x % 10
+                    x = ~~(x / 10)
+                    rev = rev * 10 + digit
+                }
+                if (rev === x || ~~(rev / 10) === x) {
+                    return true
+                }
+                return false
+            }
+        </script>
+    </body>
+</html>

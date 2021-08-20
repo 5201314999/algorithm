@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>打家劫舍,不能爬相邻格子，求最大路径和</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            /**
+             * @param {number[]} nums
+             * @return {number}
+             */
+            var rob = function (nums) {
+                if (!nums.length) return 0
+                var dp = new Array(nums.length) // dp[i] 抢劫至i 家的最大收益，不一定抢劫i家
+
+                dp[0] = nums[0]
+                dp[1] = Math.max(nums[0], nums[1])
+                for (let i = 2; i < nums.length; i++) {
+                    dp[i] = Math.max(dp[i - 2] + nums[i], dp[i - 1])
+                }
+
+                return dp[nums.length - 1]
+            }
+        </script>
+    </body>
+</html>

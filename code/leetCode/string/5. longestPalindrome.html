@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>最长回文字符串 (待定)</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            /**
+             * @param {string} s
+             * @return {string}
+             */
+            // 动态规划法
+            var longestPalindrome = function (s) {
+                if (s.length < 2) {
+                    return s
+                }
+
+                var len = s.length
+                var dp = new Array(len)
+                for (let i = 0; i < len; i++) {
+                    dp[i] = new Array(len)
+                }
+                var start = 0
+                var maxLen = 1
+                for (var i = 0; i < len; i++) {
+                    dp[i][i] = true
+                }
+                for (var j = 1; j < len; j++) {
+                    for (var i = 0; i < j; i++) {
+                        if (s[i] !== s[j]) {
+                            dp[i][j] = false
+                        } else {
+                            dp[i][j] = j - i < 3 || dp[i + 1][j - 1]
+                        }
+                        if (j - i + 1 > maxLen && dp[i][j]) {
+                            maxLen = j - i + 1
+                            start = i
+                        }
+                    }
+                }
+                return s.substr(start, maxLen)
+            }
+            console.log(longestPalindrome('abcba'))
+            // 中心扩展法 dp[i][j] = dp[i+1][j-1]  = dp【
+            var longestPalindrome = function (s) {
+                if (s.length < 2) {
+                    return s
+                }
+                var begin = 0
+                var maxLen = 1
+                var len3
+                for (let i = 0; i < s.length - 1; i++) {
+                    len1 = expand(s, i, i)
+                    len2 = expand(s, i, i + 1)
+                    len3 = Math.max(len1, len2)
+                    if (maxLen < len3) {
+                        maxLen = len3
+                        begin = i - Math.floor((maxLen - 1) / 2)
+                    }
+                }
+                return s.substr(begin, maxLen)
+            }
+
+            function expand(s, i, j) {
+                while (s[i] === s[j] && i >= 0 && j < s.length) {
+                    i--
+                    j++
+                }
+                return j - i - 1
+            }
+        </script>
+    </body>
+</html>
