@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>字符串相加,高精度问题 (简单)</title>
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link href="" rel="stylesheet" />
+    </head>
+    <body>
+        <script>
+            /**
+             * @param {string} num1
+             * @param {string} num2
+             * @return {string}
+             */
+            var addStrings = function (num1, num2) {
+                var i = num1.length - 1
+                var j = num2.length - 1
+                var res = []
+                var temp = 0
+                var onesum
+                while (i >= 0 || j >= 0) {
+                    if (i >= 0 && j >= 0) {
+                        onesum = Number(num1[i]) + Number(num2[j]) + temp
+                    } else if (i >= 0) {
+                        onesum = Number(num1[i]) + temp
+                    } else {
+                        onesum = Number(num2[j]) + temp
+                    }
+                    if (onesum >= 10) {
+                        res.unshift(onesum % 10)
+                        temp = ~~(onesum / 10)
+                    } else {
+                        res.unshift(onesum)
+                        temp = 0
+                    }
+                    i--
+                    j--
+                }
+                if (temp > 0) {
+                    res.unshift(temp)
+                }
+                return res.join('')
+            }
+
+            console.log(addStrings('11', '123'))
+        </script>
+    </body>
+</html>
